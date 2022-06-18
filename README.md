@@ -14,9 +14,13 @@ After you have installed requirements, you need to set your .env file using .env
 It's scraping using keywords defined in keywords.txt, you can set as you want too.
 
 Just run using the command:
+
 ```python newsletter.py```
 
 Or you can use docker:
+
 ```docker build -t newsletter```
 
-```docker run -p 8000:8000 newsletter```
+```docker run -p 8000:8000 newsletter -e TELEGRAM_BOT_TOKEN='' TELEGRAM_BOT_CHAT ='' ```
+or 
+```docker run -p 8000:8000 newsletter```    and set ENV TELEGRAM_BOT_TOKEN =''\ ENV TELEGRAM_BOT_CHAT='' in dockerfile
