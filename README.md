@@ -7,7 +7,7 @@ If you want to use the source code, please mention where did you take from :)
 
 # Requirements
 Install all libraries using 
-```pip install -r requirements```
+```pip install -r requirements.txt```
 
 # How to run
 After you have installed requirements, you need to set your .env file using .env.example as model
