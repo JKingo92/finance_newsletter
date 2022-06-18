@@ -41,8 +41,8 @@ class NewsletterScrapper():
                                 result[link].append(kwords)
                             else:
                                 result[link] = [kwords]
-            except:
-                None
+            except Exception as ex:
+                print(f'Something went wrong: {ex}')
         return result
 
     def scrap_investing(self):
@@ -66,8 +66,8 @@ class NewsletterScrapper():
                                 result[link].append(word)
                             else:
                                 result[link] = [word]
-            except:
-                None
+            except Exception as ex:
+                print(f'Something went wrong: {ex}')
         return result
 
     def scrap_infomoney(self):
@@ -91,8 +91,8 @@ class NewsletterScrapper():
                                     result[link].append(kword)
                                 else:
                                     result[link] = [kword]
-            except:
-                None
+            except Exception as ex:
+                print(f'Something went wrong: {ex}')
         return result
 
 
@@ -100,8 +100,12 @@ if __name__ == '__main__':
     with open('keywords.txt', 'r') as file:
         file_content = file.read()
         file_content = file_content.split('\n')
+
         newsletter = NewsletterScrapper(file_content)
         result = {**newsletter.scrap_moneytimes(), **newsletter.scrap_investing(), **newsletter.scrap_infomoney()}
+
+        # Send message to bot
         telegram_bot_sendtext(result)
+        # Write json file
         with open('news.json', 'w') as jsonresult:
             json.dump(result, jsonresult)
