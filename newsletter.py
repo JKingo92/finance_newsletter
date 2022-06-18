@@ -21,14 +21,12 @@ class NewsletterScrapper():
         soup = get_soup_from_url(os.environ.get('MONEYTIMES_URL', 'https://www.moneytimes.com.br/'))
         top_news = soup.find('ol')
         top_news = extract_links(top_news)
-
-        links_list = []
-        all_news = soup.findAll('h2', {'class': 'news-item__title'})
-        for news in all_news:
-            links_list.append(extract_links(news)[0])
+        
+        other_news = soup.findAll('h2', {'class': 'news-item__title'})
+        links_list = [extract_links(news)[0] for news in other_news]
 
         all_links = top_news + links_list
-        all_links = list(dict.fromkeys(all_links))
+        all_links = list(set(all_links))  # Remove duplicates
 
         for link in all_links:
             try:
@@ -53,11 +51,8 @@ class NewsletterScrapper():
         investing_url = os.environ.get('INVESTING_URL', 'https://br.investing.com/')
         soup = get_soup_from_url(investing_url)
         all_news = soup.findAll('div', {'class': 'textDiv'})
-        links_investing = []
-
-        for news in all_news:
-            links_investing.append(extract_links(news))
-
+        
+        links_investing = [extract_links(news) for news in all_news]
         links_investing = [investing_url + x[0] for x in links_investing if len(x) > 0]
         for link in links_investing:
             try:
