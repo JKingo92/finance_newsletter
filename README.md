@@ -24,3 +24,11 @@ Or you can use docker:
 ```docker run -p 8000:8000 newsletter -e TELEGRAM_BOT_TOKEN='' TELEGRAM_BOT_CHAT ='' ```
 or 
 ```docker run -p 8000:8000 newsletter```    and set ENV TELEGRAM_BOT_TOKEN =''\ ENV TELEGRAM_BOT_CHAT='' in dockerfile
+
+or to copy news.json file you can use
+
+```docker run -p 8000:8000 --name newsletter newsletter```
+
+and after
+
+```docker cp newsletter:/newsletter/news.json . ```
